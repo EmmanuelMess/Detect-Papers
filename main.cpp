@@ -120,8 +120,6 @@ static void findSquares( const Mat& image, vector<vector<Point> >& squares ) {
 				// find contours and store them all as a list
 				findContours(gray, contours, RETR_LIST, CHAIN_APPROX_SIMPLE);
 
-				show(gray);
-
 				vector<Point> approx;
 				// test each contour
 				for (auto &contour : contours) {
@@ -158,28 +156,28 @@ static void findSquares( const Mat& image, vector<vector<Point> >& squares ) {
 }
 int main(int argc, char** argv) {
 	vector<string> names;
-	//names.emplace_back("assets/0.jpg");
-	//names.emplace_back("assets/1.jpg");
-	//names.emplace_back("assets/2.jpg");
-	//names.emplace_back("assets/3.jpg");
+	names.emplace_back("assets/0.jpg");
+	names.emplace_back("assets/1.jpg");
+	names.emplace_back("assets/2.jpg");
+	names.emplace_back("assets/3.jpg");
 	names.emplace_back("assets/4.jpg");
-	//names.emplace_back("assets/5.jpg");
-	//names.emplace_back("assets/6.jpg");
-	//names.emplace_back("assets/7.jpg");
-	//names.emplace_back("assets/8.jpg");
-	//names.emplace_back("assets/9.jpg");
-	//names.emplace_back("assets/10.jpg");
-	//names.emplace_back("assets/11.jpg");
-	//names.emplace_back("assets/12.jpg");
-	//names.emplace_back("assets/13.jpg");
-	//names.emplace_back("assets/14.jpg");
-	//names.emplace_back("assets/15.jpg");
-	//names.emplace_back("assets/16.jpg");
-	//names.emplace_back("assets/17.jpg");
-	//names.emplace_back("assets/18.jpg");
-	//names.emplace_back("assets/19.jpg");
-	//names.emplace_back("assets/20.jpg");
-	//names.emplace_back("assets/21.jpg");
+	names.emplace_back("assets/5.jpg");
+	names.emplace_back("assets/6.jpg");
+	names.emplace_back("assets/7.jpg");
+	names.emplace_back("assets/8.jpg");
+	names.emplace_back("assets/9.jpg");
+	names.emplace_back("assets/10.jpg");
+	names.emplace_back("assets/11.jpg");
+	names.emplace_back("assets/12.jpg");
+	names.emplace_back("assets/13.jpg");
+	names.emplace_back("assets/14.jpg");
+	names.emplace_back("assets/15.jpg");
+	names.emplace_back("assets/16.jpg");
+	names.emplace_back("assets/17.jpg");
+	names.emplace_back("assets/18.jpg");
+	names.emplace_back("assets/19.jpg");
+	names.emplace_back("assets/20.jpg");
+	names.emplace_back("assets/21.jpg");
 
 	help(argv[0]);
 	if (argc > 1) {
@@ -205,7 +203,7 @@ int main(int argc, char** argv) {
 		resizeWindow(wndname, 250, 250);
 		imshow(wndname, drawn);
 
-		if(false) {
+		if(true) {
 			int number = 0;
 			for (auto square : squares) {
 				if (number > 1) break;
