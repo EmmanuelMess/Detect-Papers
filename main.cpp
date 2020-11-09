@@ -18,15 +18,6 @@ void show(Mat& mat) {
 	waitKey();
 }
 
-static void help(const char* programName) {
-	cout <<
-	     "\nA program using pyramid scaling, Canny, contours and contour simplification\n"
-	     "to find squares in a list of images (pic1-6.png)\n"
-	     "Returns sequence of squares detected on the image.\n"
-	     "Call:\n"
-	     "./" << programName << " [file_name (optional)]\n"
-	                            "Using OpenCV version " << CV_VERSION << "\n" << endl;
-}
 int thresh = 20, N = 11;
 const char* wndname = "Square Detection Demo";
 // helper function:
@@ -179,7 +170,6 @@ int main(int argc, char** argv) {
 	names.emplace_back("assets/20.jpg");
 	names.emplace_back("assets/21.jpg");
 
-	help(argv[0]);
 	if (argc > 1) {
 		names.emplace_back(argv[1]);
 	}
