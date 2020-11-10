@@ -10,20 +10,13 @@
 
 using namespace cv;
 using namespace std;
-void show(Mat& mat) {
-	auto windowname = "Test";
-	namedWindow(windowname, 0);
-	resizeWindow(windowname, 500, 500);
-	imshow(windowname, mat);
-	waitKey();
-}
 
 int thresh = 20, N = 11;
 const char* wndname = "Square Detection Demo";
 // helper function:
 // finds a cosine of angle between vectors
 // from pt0->pt1 and from pt0->pt2
-static double angle( const Point& pt1, const Point& pt2, const Point& pt0 ) {
+inline double angle( const Point& pt1, const Point& pt2, const Point& pt0 ) {
 	double dx1 = pt1.x - pt0.x;
 	double dy1 = pt1.y - pt0.y;
 	double dx2 = pt2.x - pt0.x;
