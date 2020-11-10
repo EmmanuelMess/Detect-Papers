@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
-project(opencvtest)
+project(detectPapers)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -9,8 +9,8 @@ find_package( OpenCV 4.1.2 REQUIRED )
 
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-add_executable(opencvtest main.cpp)
+add_executable(detectPapers main.cpp)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-target_link_libraries(opencvtest ${OpenCV_LIBS})
+target_link_libraries(detectPapers ${OpenCV_LIBS})
