@@ -138,6 +138,34 @@ static void findSquares( const Mat& image, vector<vector<Point> >& squares ) {
 		}
 	}
 }
+
+Mat removeShadows(const Mat& image) {
+	Mat rgb_planes[3];
+	split(image, rgb_planes);
+	Mat dilatation;
+	Mat blurred;
+	Mat difference;
+	Mat rgb_result[3];
+
+	for(int i = 0; i < 3; i++) {
+		Mat dilationKernel = getStructuringElement( MORPH_RECT, Size(9, 9));
+
+		dilate(rgb_planes[i], dilatation, dilationKernel);
+
+		medianBlur(dilatation, blurred, 21);
+
+		absdiff(rgb_planes[i], blurred, difference);
+		subtract(Scalar(255), difference, difference);
+
+		normalize(difference, rgb_result[i], 0, 255, NORM_MINMAX, CV_8UC1);
+	}
+
+	Mat result;
+	merge(rgb_result, 3, result);
+
+	return result;
+}
+
 int main(int argc, char** argv) {
 	vector<string> names;
 	names.emplace_back("assets/0.jpg");
@@ -197,7 +225,7 @@ int main(int argc, char** argv) {
 				fourPointTransform(cut, vector<Point2f>(square.begin(), square.end()));
 				namedWindow(wndname1, 0);
 				resizeWindow(wndname1, 250, 250);
-				imshow(wndname1, cut);
+				imshow(wndname1, removeShadows(cut));
 			}
 		}
 

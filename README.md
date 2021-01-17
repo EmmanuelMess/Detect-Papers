@@ -14,6 +14,7 @@ Credit:
 * [The "Square Detector" program, OpenCV](https://docs.opencv.org/4.3.0/db/d00/samples_2cpp_2squares_8cpp-example.html)
 * [OpenCV C++/Obj-C: Detecting a sheet of paper / Square Detection](https://stackoverflow.com/questions/8667818/opencv-c-obj-c-detecting-a-sheet-of-paper-square-detection)
 * [Algorithm to detect corners of paper sheet in photo](https://stackoverflow.com/questions/6555629/algorithm-to-detect-corners-of-paper-sheet-in-photo)
+* [Shadow removal with Open-CV](https://medium.com/arnekt-ai/shadow-removal-with-open-cv-71e030eadaf5)
 ----
 <a class="imgpatreon" href="https://www.patreon.com/emmanuelmess" target="_blank">
 <img alt="Become a patreon" src="https://user-images.githubusercontent.com/10991116/56376378-07065400-61de-11e9-9583-8ff2148aa41c.png" width=150px></a>
