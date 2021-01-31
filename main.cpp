@@ -166,6 +166,9 @@ Mat removeShadows(const Mat& image) {
 	return result;
 }
 
+const float PROCESS_WIDTH = 512;
+const float PROCESS_HEIGHT = 910;
+
 int main(int argc, char** argv) {
 	vector<string> names;
 	names.emplace_back("assets/0.jpg");
@@ -201,28 +204,55 @@ int main(int argc, char** argv) {
 			cout << "Couldn't load " << filename << endl;
 			continue;
 		}
+
+		Size newSize;
+
+		if(image.size().width < PROCESS_WIDTH || image.size().height < PROCESS_HEIGHT) {
+			newSize = image.size();
+		} else if(image.size().height < image.size().width) {
+			newSize = Size(PROCESS_HEIGHT, PROCESS_WIDTH);
+		} else {
+			newSize = Size(PROCESS_WIDTH, PROCESS_HEIGHT);
+		}
+
+		const float ratioWidth = image.size().width / newSize.width;
+		const float ratioHeight = image.size().height / newSize.height;
+		Mat resizedImage;
+		resize(image, resizedImage, newSize, 0, 0, INTER_AREA);
+
 		vector<vector<Point> > squares;
-		findSquares(image.clone(), squares);
+		findSquares(resizedImage.clone(), squares);
 
 		sort(squares.begin(), squares.end(), [](const vector<Point>& a, const vector<Point>& b){
 			return contourArea(a) > contourArea(b);
 		});
 
+		vector<vector<Point> > unresizedSquares;
+
+		for (const auto& square : squares) {
+			vector<Point> unresizedSquare;
+			for (auto &i : square) {
+				unresizedSquare.emplace_back(i.x * ratioWidth, i.y * ratioHeight);
+			}
+
+			unresizedSquares.push_back(unresizedSquare);
+		}
+
 		Mat drawn = image.clone();
-		polylines(drawn, squares, true, Scalar(0, 255, 0), 3, LINE_AA);
+		polylines(drawn, unresizedSquares, true, Scalar(0, 255, 0), 3, LINE_AA);
 		namedWindow(wndname, 0);
 		resizeWindow(wndname, 250, 250);
 		imshow(wndname, drawn);
 
 		if(true) {
 			int number = 0;
-			for (auto square : squares) {
+			for (const auto& unresizedSquare : unresizedSquares) {
 				if (number > 1) break;
 
 				auto wndname1 = "Square Cut:" + to_string(number++);
 
 				Mat cut = image.clone();
-				fourPointTransform(cut, vector<Point2f>(square.begin(), square.end()));
+				fourPointTransform(cut, vector<Point2f>(unresizedSquare.begin(), unresizedSquare.end()));
 				namedWindow(wndname1, 0);
 				resizeWindow(wndname1, 250, 250);
 				imshow(wndname1, removeShadows(cut));
