@@ -139,7 +139,7 @@ static void findSquares( const Mat& image, vector<vector<Point> >& squares ) {
 	}
 }
 
-Mat removeShadows(const Mat& image) {
+static Mat removeShadows(const Mat& image) {
 	Mat rgb_planes[3];
 	split(image, rgb_planes);
 	Mat dilatation;
