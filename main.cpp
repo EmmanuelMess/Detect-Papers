@@ -234,6 +234,8 @@ int main(int argc, char** argv) {
 
 		for (const auto& square : squares) {
 			vector<Point> unresizedSquare;
+
+			unresizedSquare.reserve(square.size());
 			for (auto &i : square) {
 				unresizedSquare.emplace_back(i.x * ratioWidth, i.y * ratioHeight);
 			}
