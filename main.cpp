@@ -139,7 +139,7 @@ static void findSquares( const Mat& image, vector<vector<Point> >& squares ) {
 	}
 }
 
-static Mat removeShadows(const Mat& image) {
+static void removeShadows(const Mat& image, Mat &result) {
 	Mat rgb_planes[3];
 	split(image, rgb_planes);
 	Mat dilatation;
@@ -160,10 +160,7 @@ static Mat removeShadows(const Mat& image) {
 		normalize(difference, rgb_result[i], 0, 255, NORM_MINMAX, CV_8UC1);
 	}
 
-	Mat result;
 	merge(rgb_result, 3, result);
-
-	return result;
 }
 
 const float PROCESS_WIDTH = 512;
@@ -255,7 +252,10 @@ int main(int argc, char** argv) {
 				fourPointTransform(cut, vector<Point2f>(unresizedSquare.begin(), unresizedSquare.end()));
 				namedWindow(wndname1, 0);
 				resizeWindow(wndname1, 250, 250);
-				imshow(wndname1, removeShadows(cut));
+
+				Mat noShadows;
+				removeShadows(cut, noShadows);
+				imshow(wndname1, noShadows);
 			}
 		}
 
