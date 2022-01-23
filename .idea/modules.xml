@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/opencvtest.iml" filepath="$PROJECT_DIR$/.idea/opencvtest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Detect-Papers.iml" filepath="$PROJECT_DIR$/.idea/Detect-Papers.iml" />
     </modules>
   </component>
 </project>
